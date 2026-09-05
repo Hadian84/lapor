@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Siswa - SISWA SMART MONITORING</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/jpeg" href="logo2.jpg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-allowed-roles="siswa,admin">
+
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo-icon">
+          <img src="logo2.jpg" alt="Logo SMP Negeri 1 Segah">
+        </div>
+        <div class="sidebar-brand-text">
+          <h2>SMART MONITOR</h2>
+          <span>Portal Siswa</span>
+        </div>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="sidebar-group-title">Menu Siswa</div>
+        <ul class="sidebar-menu">
+          <li><a href="dashboard-siswa.html" class="sidebar-link active"><i class="fa-solid fa-house"></i> Beranda Siswa</a></li>
+          <li><a href="profil-siswa.html?id=std-01" class="sidebar-link" id="link-my-profile"><i class="fa-solid fa-id-card"></i> Profil Monitoring Saya</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user-avatar current-user-avatar">S</div>
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-name current-user-name">Siswa</div>
+          <div class="sidebar-user-role current-user-role">Siswa SMP</div>
+        </div>
+        <button class="sidebar-logout-btn btn-logout" title="Keluar"><i class="fa-solid fa-right-from-bracket"></i></button>
+      </div>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="top-header">
+        <div class="header-left">
+          <button class="sidebar-toggle-btn"><i class="fa-solid fa-bars"></i></button>
+          <div style="font-weight: 700; font-size: 1.1rem; color: var(--dark);">Portal Monitoring Kedisiplinan Siswa</div>
+        </div>
+        <div class="header-right">
+          <div class="header-academic-year"><i class="fa-solid fa-calendar-days"></i> <span>T.P. 2026/2027</span></div>
+          <div class="user-menu-pill">
+            <div class="user-avatar-sm current-user-avatar">S</div>
+            <div style="display: flex; flex-direction: column; line-height: 1.1;">
+              <span class="current-user-name" style="font-weight: 700; font-size: 0.85rem;">Siswa</span>
+              <span class="current-user-role" style="font-size: 0.72rem; color: var(--text-muted);">Siswa Aktif</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="content-body">
+        <!-- Motivational Welcome Banner -->
+        <div class="card" style="background: linear-gradient(135deg, #1e40af 0%, #0284c7 100%); color: #fff; margin-bottom: 2rem;">
+          <div class="card-body" style="padding: 2.25rem 2rem;">
+            <div class="d-flex align-center justify-between flex-wrap gap-2">
+              <div>
+                <h1 style="color: #fff; font-size: 1.8rem; margin-bottom: 0.5rem;">
+                  Selamat Datang, <span id="siswa-welcome-name">Aditya Pratama</span>! 👋
+                </h1>
+                <p style="color: #e0f2fe; margin-bottom: 0; font-size: 1rem;">
+                  "Pertahankan kedisiplinanmu, jadilah teladan, dan terus tingkatkan prestasimu menuju masa depan gemilang!"
+                </p>
+              </div>
+              <div>
+                <a href="profil-siswa.html?id=std-01" class="btn btn-primary" id="btn-open-full-profile" style="background: #fff; color: var(--primary); font-weight: 700;">
+                  <i class="fa-solid fa-id-card"></i> Lihat Profil Lengkap Saya
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Discipline Score Gauge Card -->
+        <div class="card" style="margin-bottom: 2rem;">
+          <div class="card-header">
+            <h3 class="card-title"><i class="fa-solid fa-shield-halved text-primary"></i> Indeks Kedisiplinan Saya</h3>
+            <span class="badge" id="siswa-discipline-status">SANGAT BAIK</span>
+          </div>
+          <div class="card-body">
+            <div class="d-flex align-center justify-between" style="margin-bottom: 0.5rem;">
+              <span class="text-muted" style="font-weight: 600;">Skor Kedisiplinan Kumulatif</span>
+              <span style="font-size: 1.6rem; font-weight: 800;" id="siswa-discipline-score">96</span>
+            </div>
+            <div class="progress" style="height: 12px;">
+              <div class="progress-bar bg-success" id="siswa-discipline-progress" style="width: 96%;"></div>
+            </div>
+            <p class="text-muted text-xs mt-1">
+              *Skor dihitung berdasarkan tingkat kehadiran harian (60%), ketepatan waktu hadir (20%), dan rekam jejak tata tertib sekolah (20%).
+            </p>
+          </div>
+        </div>
+
+        <!-- Metric Cards -->
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-icon green"><i class="fa-solid fa-clipboard-user"></i></div>
+            <div class="stat-info">
+              <div class="stat-value" id="siswa-stat-attendance">98%</div>
+              <div class="stat-label">Kehadiran Saya</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon amber"><i class="fa-solid fa-clock"></i></div>
+            <div class="stat-info">
+              <div class="stat-value" id="siswa-stat-late">0</div>
+              <div class="stat-label">Kali Terlambat</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon red"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <div class="stat-info">
+              <div class="stat-value" id="siswa-stat-violations">0</div>
+              <div class="stat-label">Catatan Pelanggaran</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon red"><i class="fa-solid fa-circle-exclamation"></i></div>
+            <div class="stat-info">
+              <div class="stat-value" id="siswa-stat-points">0</div>
+              <div class="stat-label">Total Poin Sanksi</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon sky"><i class="fa-solid fa-trophy"></i></div>
+            <div class="stat-info">
+              <div class="stat-value text-success" id="siswa-stat-achievements">1</div>
+              <div class="stat-label">Prestasi Diraih</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- History Lists -->
+        <div class="d-grid gap-3" style="grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));">
+          <!-- Pelanggaran Saya -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fa-solid fa-triangle-exclamation text-danger"></i> Riwayat Pelanggaran Saya</h3>
+            </div>
+            <div class="card-body" id="siswa-violation-list" style="padding: 0;"></div>
+          </div>
+
+          <!-- Prestasi Saya -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fa-solid fa-trophy text-success"></i> Capaian Prestasi Saya</h3>
+            </div>
+            <div class="card-body" id="siswa-achievement-list" style="padding: 0;"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+  <script type="module" src="js/auth-guard.js"></script>
+  <script type="module">
+    import { Auth } from './js/auth.js';
+    import { initSiswaDashboard } from './js/dashboard.js';
+
+    const currentUser = Auth.getCurrentUser();
+    if (currentUser && currentUser.studentId) {
+      document.getElementById('link-my-profile').href = `profil-siswa.html?id=${currentUser.studentId}`;
+      document.getElementById('btn-open-full-profile').href = `profil-siswa.html?id=${currentUser.studentId}`;
+    }
+
+    initSiswaDashboard();
+  </script>
+</body>
+</html>

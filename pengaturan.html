@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pengaturan Sistem - SISWA SMART MONITORING</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/jpeg" href="logo2.jpg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-allowed-roles="admin">
+
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo-icon">
+          <img src="logo2.jpg" alt="Logo SMP Negeri 1 Segah">
+        </div>
+        <div class="sidebar-brand-text">
+          <h2>SMART MONITOR</h2>
+          <span>SMP Negeri 1 Segah</span>
+        </div>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="sidebar-group-title">Menu Utama</div>
+        <ul class="sidebar-menu">
+          <li><a href="dashboard-admin.html" class="sidebar-link"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+        </ul>
+
+        <div class="sidebar-group-title">Data Master</div>
+        <ul class="sidebar-menu">
+          <li><a href="siswa.html" class="sidebar-link"><i class="fa-solid fa-user-graduate"></i> Data Siswa</a></li>
+          <li><a href="guru.html" class="sidebar-link"><i class="fa-solid fa-chalkboard-user"></i> Data Guru</a></li>
+          <li><a href="kelas.html" class="sidebar-link"><i class="fa-solid fa-school"></i> Data Kelas</a></li>
+        </ul>
+
+        <div class="sidebar-group-title">Kedisiplinan & Presensi</div>
+        <ul class="sidebar-menu">
+          <li><a href="kehadiran.html" class="sidebar-link"><i class="fa-solid fa-clipboard-user"></i> Presensi Kehadiran</a></li>
+          <li><a href="keterlambatan.html" class="sidebar-link"><i class="fa-solid fa-clock"></i> Keterlambatan</a></li>
+          <li><a href="pelanggaran.html" class="sidebar-link"><i class="fa-solid fa-triangle-exclamation"></i> Catatan Pelanggaran</a></li>
+          <li><a href="kategori-pelanggaran.html" class="sidebar-link"><i class="fa-solid fa-list-check"></i> Kategori & Poin</a></li>
+        </ul>
+
+        <div class="sidebar-group-title">Prestasi Siswa</div>
+        <ul class="sidebar-menu">
+          <li><a href="prestasi.html" class="sidebar-link"><i class="fa-solid fa-trophy"></i> Prestasi Siswa</a></li>
+          <li><a href="kategori-prestasi.html" class="sidebar-link"><i class="fa-solid fa-award"></i> Kategori Prestasi</a></li>
+        </ul>
+
+        <div class="sidebar-group-title">Laporan & Sistem</div>
+        <ul class="sidebar-menu">
+          <li><a href="laporan.html" class="sidebar-link"><i class="fa-solid fa-file-lines"></i> Laporan & Rekap</a></li>
+          <li><a href="kelola-akun.html" class="sidebar-link"><i class="fa-solid fa-user-gear"></i> Kelola Akun & Password</a></li>
+          <li><a href="pengaturan.html" class="sidebar-link active"><i class="fa-solid fa-gear"></i> Pengaturan Sekolah</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user-avatar current-user-avatar">A</div>
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-name current-user-name">Administrator</div>
+          <div class="sidebar-user-role current-user-role">Administrator</div>
+        </div>
+        <button class="sidebar-logout-btn btn-logout" title="Keluar"><i class="fa-solid fa-right-from-bracket"></i></button>
+      </div>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="top-header">
+        <div class="header-left">
+          <button class="sidebar-toggle-btn"><i class="fa-solid fa-bars"></i></button>
+          <div class="header-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="global-student-search" placeholder="Cari siswa (Nama / NIS / Kelas)...">
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="header-academic-year"><i class="fa-solid fa-calendar-days"></i> <span>T.P. 2026/2027</span></div>
+          <div class="user-menu-pill">
+            <div class="user-avatar-sm current-user-avatar">A</div>
+            <div style="display: flex; flex-direction: column; line-height: 1.1;">
+              <span class="current-user-name" style="font-weight: 700; font-size: 0.85rem;">Admin</span>
+              <span class="current-user-role" style="font-size: 0.72rem; color: var(--text-muted);">Admin</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="content-body">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Pengaturan Sekolah & Sistem</h1>
+            <p class="page-subtitle">Kelola profil satuan pendidikan, tahun pelajaran aktif, jam operasional, dan bobot kedisiplinan.</p>
+          </div>
+        </div>
+
+        <!-- Profil Sekolah Form -->
+        <div class="card" style="margin-bottom: 2rem;">
+          <div class="card-header">
+            <h3 class="card-title"><i class="fa-solid fa-school text-primary"></i> Profil Satuan Pendidikan</h3>
+          </div>
+          <form id="settings-form">
+            <div class="card-body">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label required" for="set-school-name">Nama Sekolah</label>
+                  <input type="text" id="set-school-name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label required" for="set-npsn">NPSN</label>
+                  <input type="text" id="set-npsn" class="form-control" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label required" for="set-address">Alamat Sekolah</label>
+                <textarea id="set-address" class="form-control" rows="2" required></textarea>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label required" for="set-principal-name">Nama Kepala Sekolah & Gelar</label>
+                  <input type="text" id="set-principal-name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="set-principal-nip">NIP Kepala Sekolah</label>
+                  <input type="text" id="set-principal-nip" class="form-control">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label required" for="set-academic-year">Tahun Pelajaran Aktif</label>
+                  <select id="set-academic-year" class="form-select" required>
+                    <option value="2025/2026">2025/2026</option>
+                    <option value="2026/2027">2026/2027 (Aktif)</option>
+                    <option value="2027/2028">2027/2028</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label required" for="set-semester">Semester</label>
+                  <select id="set-semester" class="form-select" required>
+                    <option value="Ganjil">Semester Ganjil</option>
+                    <option value="Genap">Semester Genap</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label required" for="set-start-time">Jam Masuk Sekolah (Toleransi)</label>
+                  <input type="time" id="set-start-time" class="form-control" required>
+                  <small class="text-muted" style="font-size: 0.75rem;">*Siswa yang tiba setelah jam ini otomatis dihitung terlambat.</small>
+                </div>
+                <div class="form-group">
+                  <label class="form-label required" for="set-end-time">Jam Pulang Sekolah</label>
+                  <input type="time" id="set-end-time" class="form-control" required>
+                </div>
+              </div>
+
+              <!-- Bobot Kedisiplinan -->
+              <h4 style="font-size: 1rem; margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--dark);">
+                <i class="fa-solid fa-scale-balanced text-warning"></i> Bobot Penilaian Skor Kedisiplinan (Total Wajib 100%)
+              </h4>
+              <div class="form-row-3">
+                <div class="form-group">
+                  <label class="form-label required" for="set-weight-att">Bobot Kehadiran (%)</label>
+                  <input type="number" id="set-weight-att" class="form-control" min="0" max="100" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label required" for="set-weight-punc">Bobot Ketepatan Waktu (%)</label>
+                  <input type="number" id="set-weight-punc" class="form-control" min="0" max="100" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label required" for="set-weight-viol">Bobot Tata Tertib/Pelanggaran (%)</label>
+                  <input type="number" id="set-weight-viol" class="form-control" min="0" max="100" required>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span class="text-muted text-xs">Perubahan akan langsung berpengaruh pada seluruh perhitungan sistem.</span>
+              <button type="submit" class="btn btn-primary btn-sm"><i class="fa-solid fa-floppy-disk"></i> Simpan Pengaturan Sekolah</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Firebase Configuration & Sync -->
+        <div class="card" style="margin-bottom: 2rem;">
+          <div class="card-header">
+            <h3 class="card-title"><i class="fa-solid fa-fire-flame-curved text-warning"></i> Konfigurasi Cloud Firebase</h3>
+          </div>
+          <div class="card-body">
+            <p class="text-muted text-sm">
+              Untuk mengaktifkan sinkronisasi Cloud Firestore dan Firebase Auth secara live, masukkan objek JSON konfigurasi dari Firebase Console Anda di bawah ini:
+            </p>
+            <div class="form-group">
+              <label class="form-label" for="firebase-config-json">Firebase Web Config JSON</label>
+              <textarea id="firebase-config-json" class="form-control" rows="6" placeholder='{
+  "apiKey": "AIzaSy...",
+  "authDomain": "sekolah-smart.firebaseapp.com",
+  "projectId": "sekolah-smart",
+  "storageBucket": "sekolah-smart.appspot.com",
+  "messagingSenderId": "...",
+  "appId": "..."
+}'></textarea>
+            </div>
+            <button type="button" id="btn-save-firebase-config" class="btn btn-secondary btn-sm">
+              <i class="fa-solid fa-cloud-arrow-up"></i> Simpan Konfigurasi Firebase
+            </button>
+          </div>
+        </div>
+
+        <!-- Demo Data Reset Section -->
+        <div class="card" style="border-color: var(--danger-border);">
+          <div class="card-header" style="background-color: var(--danger-light);">
+            <h3 class="card-title text-danger"><i class="fa-solid fa-triangle-exclamation"></i> Manajemen Data Demo Awal</h3>
+          </div>
+          <div class="card-body">
+            <p class="text-muted text-sm">
+              Ingin mengulang simulasi dari awal? Fitur ini akan mereset seluruh database lokal ke 20 siswa demo, 6 kelas, 5 guru, presensi, pelanggaran, dan prestasi contoh default.
+            </p>
+            <button type="button" class="btn btn-outline-danger btn-sm" id="btn-reset-demo">
+              <i class="fa-solid fa-rotate-left"></i> Reset ke Data Demo Bawaan
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+  <script type="module" src="js/auth-guard.js"></script>
+  <script type="module">
+    import { initSettingsPage } from './js/settings.js';
+    initSettingsPage();
+  </script>
+</body>
+</html>

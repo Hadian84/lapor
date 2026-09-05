@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - SISWA SMART MONITORING</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/jpeg" href="logo2.jpg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #1d4ed8 100%);
+      padding: 1.5rem;
+    }
+    .login-card {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 460px;
+      box-shadow: var(--shadow-xl);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .login-header {
+      background: #fff;
+      padding: 2.25rem 2rem 1.5rem 2rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .login-logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem auto;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+    }
+    .login-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
+    }
+    .login-body {
+      padding: 2rem;
+    }
+    .demo-selector {
+      background-color: var(--bg-subtle);
+      border: 1px dashed var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-card">
+    <div class="login-header">
+      <div class="login-logo">
+        <img src="logo2.jpg" alt="Logo SMP Negeri 1 Segah">
+      </div>
+      <h2 style="font-size: 1.4rem; font-weight: 800; color: var(--dark); margin-bottom: 0.25rem;">SISWA SMART MONITORING</h2>
+      <p class="text-muted text-sm" style="margin: 0;">Sistem Monitoring Pelanggaran, Prestasi dan Kehadiran Siswa</p>
+      <div class="badge badge-primary mt-1" style="font-size: 0.7rem;">SMP Negeri 1 Segah</div>
+    </div>
+
+    <div class="login-body">
+      <!-- Quick Demo Account Switcher -->
+      <div class="demo-selector">
+        <div style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.5rem;">
+          <i class="fa-solid fa-bolt text-warning"></i> Pilih Akun Cepat (Uji Coba Demo):
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem;">
+          <button type="button" class="btn btn-secondary btn-sm quick-account-btn" data-email="admin@sekolah.sch.id" data-pass="admin123" style="font-size: 0.75rem; justify-content: flex-start;">
+            <i class="fa-solid fa-user-shield text-primary"></i> Admin
+          </button>
+          <button type="button" class="btn btn-secondary btn-sm quick-account-btn" data-email="guru@sekolah.sch.id" data-pass="guru123" style="font-size: 0.75rem; justify-content: flex-start;">
+            <i class="fa-solid fa-chalkboard-user text-success"></i> Guru
+          </button>
+          <button type="button" class="btn btn-secondary btn-sm quick-account-btn" data-email="walikelas@sekolah.sch.id" data-pass="wali123" style="font-size: 0.75rem; justify-content: flex-start;">
+            <i class="fa-solid fa-users-rectangle text-info"></i> Wali Kelas
+          </button>
+          <button type="button" class="btn btn-secondary btn-sm quick-account-btn" data-email="26001" data-pass="siswa123" style="font-size: 0.75rem; justify-content: flex-start;">
+            <i class="fa-solid fa-user-graduate text-warning"></i> Siswa (NIS)
+          </button>
+        </div>
+      </div>
+
+      <!-- Login Form -->
+      <form id="login-form">
+        <div class="form-group">
+          <label class="form-label required" for="login-identifier">Email / NIS Siswa</label>
+          <div style="position: relative;">
+            <input type="text" id="login-identifier" class="form-control" placeholder="Contoh: admin@sekolah.sch.id atau 26001" required autofocus style="padding-left: 2.4rem;">
+            <i class="fa-solid fa-user" style="position: absolute; left: 0.85rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 0.9rem;"></i>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="d-flex justify-between align-center" style="margin-bottom: 0.35rem;">
+            <label class="form-label required" for="login-password" style="margin: 0;">Password</label>
+            <a href="#" id="link-forgot-pass" style="font-size: 0.78rem; font-weight: 600;">Lupa password?</a>
+          </div>
+          <div style="position: relative;">
+            <input type="password" id="login-password" class="form-control" placeholder="Masukkan password Anda" required style="padding-left: 2.4rem;">
+            <i class="fa-solid fa-lock" style="position: absolute; left: 0.85rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 0.9rem;"></i>
+          </div>
+        </div>
+
+        <div class="form-check" style="margin-bottom: 1.5rem;">
+          <input type="checkbox" id="remember-me" checked>
+          <label for="remember-me" style="font-size: 0.82rem; color: var(--text-muted);">Ingat sesi masuk di perangkat ini</label>
+        </div>
+
+        <button type="submit" id="btn-submit-login" class="btn btn-primary w-100 btn-lg">
+          <i class="fa-solid fa-right-to-bracket"></i> Masuk Sekarang
+        </button>
+      </form>
+    </div>
+
+    <div style="background-color: var(--bg-app); padding: 1rem; text-align: center; border-top: 1px solid var(--border-color); font-size: 0.8rem; color: var(--text-muted);">
+      <a href="index.html" style="font-weight: 600;"><i class="fa-solid fa-arrow-left"></i> Kembali ke Halaman Utama</a>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <!-- Script Modules -->
+  <script type="module">
+    import { Auth } from './js/auth.js';
+    import { showToast } from './js/utils.js';
+
+    // Cek jika sudah login, langsung arahkan ke dashboard yang sesuai
+    const currentUser = Auth.getCurrentUser();
+    if (currentUser) {
+      window.location.href = Auth.getRedirectUrl(currentUser.role);
+    }
+
+    // Quick fill buttons
+    document.querySelectorAll('.quick-account-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.getElementById('login-identifier').value = btn.dataset.email;
+        document.getElementById('login-password').value = btn.dataset.pass;
+        showToast(`Form diisi dengan akun demo: ${btn.textContent.trim()}`, "info");
+      });
+    });
+
+    // Form submit handler
+    const form = document.getElementById('login-form');
+    const submitBtn = document.getElementById('btn-submit-login');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const identifier = document.getElementById('login-identifier').value.trim();
+      const password = document.getElementById('login-password').value;
+
+      if (!identifier || !password) {
+        showToast("Mohon masukkan Email/NIS dan Password", "warning");
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> Memverifikasi...`;
+
+      try {
+        const result = await Auth.login(identifier, password);
+        showToast(`Login berhasil! Selamat datang, ${result.user.name}`, "success");
+        setTimeout(() => {
+          window.location.href = result.redirectUrl;
+        }, 600);
+      } catch (err) {
+        showToast(err.message, "danger");
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `<i class="fa-solid fa-right-to-bracket"></i> Masuk Sekarang`;
+      }
+    });
+
+    // Forgot password modal
+    document.getElementById('link-forgot-pass').addEventListener('click', (e) => {
+      e.preventDefault();
+      alert("Untuk reset kata sandi, silakan hubungi Administrator Sistem atau Wali Kelas Anda.");
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Kelas - SISWA SMART MONITORING</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/jpeg" href="logo2.jpg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-allowed-roles="admin,guru,wali_kelas">
+
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo-icon">
+          <img src="logo2.jpg" alt="Logo SMP Negeri 1 Segah">
+        </div>
+        <div class="sidebar-brand-text">
+          <h2>SMART MONITOR</h2>
+          <span>SMP Negeri 1 Segah</span>
+        </div>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="sidebar-group-title">Menu Utama</div>
+        <ul class="sidebar-menu">
+          <li><a href="dashboard-admin.html" class="sidebar-link"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+        </ul>
+
+        <div class="sidebar-group-title">Data Master</div>
+        <ul class="sidebar-menu">
+          <li><a href="siswa.html" class="sidebar-link"><i class="fa-solid fa-user-graduate"></i> Data Siswa</a></li>
+          <li><a href="guru.html" class="sidebar-link"><i class="fa-solid fa-chalkboard-user"></i> Data Guru</a></li>
+          <li><a href="kelas.html" class="sidebar-link active"><i class="fa-solid fa-school"></i> Data Kelas</a></li>
+        </ul>
+
+        <div class="sidebar-group-title">Kedisiplinan & Presensi</div>
+        <ul class="sidebar-menu">
+          <li><a href="kehadiran.html" class="sidebar-link"><i class="fa-solid fa-clipboard-user"></i> Presensi Kehadiran</a></li>
+          <li><a href="keterlambatan.html" class="sidebar-link"><i class="fa-solid fa-clock"></i> Keterlambatan</a></li>
+          <li><a href="pelanggaran.html" class="sidebar-link"><i class="fa-solid fa-triangle-exclamation"></i> Catatan Pelanggaran</a></li>
+          <li><a href="kategori-pelanggaran.html" class="sidebar-link"><i class="fa-solid fa-list-check"></i> Kategori & Poin</a></li>
+        </ul>
+
+        <div class="sidebar-group-title">Prestasi Siswa</div>
+        <ul class="sidebar-menu">
+          <li><a href="prestasi.html" class="sidebar-link"><i class="fa-solid fa-trophy"></i> Prestasi Siswa</a></li>
+          <li><a href="kategori-prestasi.html" class="sidebar-link"><i class="fa-solid fa-award"></i> Kategori Prestasi</a></li>
+        </ul>
+
+        <div class="sidebar-group-title">Laporan & Sistem</div>
+        <ul class="sidebar-menu">
+          <li><a href="laporan.html" class="sidebar-link"><i class="fa-solid fa-file-lines"></i> Laporan & Rekap</a></li>
+          <li><a href="kelola-akun.html" class="sidebar-link"><i class="fa-solid fa-user-gear"></i> Kelola Akun & Password</a></li>
+          <li><a href="pengaturan.html" class="sidebar-link"><i class="fa-solid fa-gear"></i> Pengaturan Sekolah</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user-avatar current-user-avatar">A</div>
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-name current-user-name">Administrator</div>
+          <div class="sidebar-user-role current-user-role">Admin</div>
+        </div>
+        <button class="sidebar-logout-btn btn-logout" title="Keluar"><i class="fa-solid fa-right-from-bracket"></i></button>
+      </div>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="top-header">
+        <div class="header-left">
+          <button class="sidebar-toggle-btn"><i class="fa-solid fa-bars"></i></button>
+          <div class="header-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="global-student-search" placeholder="Cari siswa (Nama / NIS / Kelas)...">
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="header-academic-year"><i class="fa-solid fa-calendar-days"></i> <span>T.P. 2026/2027</span></div>
+          <div class="user-menu-pill">
+            <div class="user-avatar-sm current-user-avatar">A</div>
+            <div style="display: flex; flex-direction: column; line-height: 1.1;">
+              <span class="current-user-name" style="font-weight: 700; font-size: 0.85rem;">Admin</span>
+              <span class="current-user-role" style="font-size: 0.72rem; color: var(--text-muted);">Admin</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="content-body">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Rombongan Belajar (Kelas)</h1>
+            <p class="page-subtitle">Daftar kelas 7, 8, 9, penetapan wali kelas, dan pemantauan roster siswa aktif.</p>
+          </div>
+          <button class="btn btn-primary btn-sm" id="btn-add-class"><i class="fa-solid fa-plus"></i> Tambah Kelas Baru</button>
+        </div>
+
+        <div id="classes-container">
+          <p class="text-muted">Memuat data rombongan belajar...</p>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Modal Roster Siswa Kelas -->
+  <div class="modal-backdrop" id="class-roster-modal">
+    <div class="modal-dialog modal-dialog-lg">
+      <div class="modal-header">
+        <h3 class="modal-title" id="roster-modal-title">Daftar Siswa Kelas</h3>
+        <button class="modal-close" onclick="closeModal('class-roster-modal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="width: 40px;" class="text-center">No</th>
+                <th>NIS</th>
+                <th>Nama Siswa</th>
+                <th>L/P</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="roster-modal-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" onclick="closeModal('class-roster-modal')">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Tambah/Edit Kelas -->
+  <div class="modal-backdrop" id="class-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title" id="class-modal-title">Tambah Kelas Baru</h3>
+        <button class="modal-close" onclick="closeModal('class-modal')">&times;</button>
+      </div>
+      <form id="class-form">
+        <div class="modal-body">
+          <input type="hidden" id="cls-id">
+          <div class="form-group">
+            <label class="form-label required" for="cls-name">Nama Kelas</label>
+            <input type="text" id="cls-name" class="form-control" placeholder="Contoh: Kelas 7A, Kelas 8B, Kelas 9C" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label required" for="cls-grade">Tingkat</label>
+            <select id="cls-grade" class="form-select" required>
+              <option value="7">Kelas 7 (Tujuh)</option>
+              <option value="8">Kelas 8 (Delapan)</option>
+              <option value="9">Kelas 9 (Sembilan)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cls-homeroom">Nama Wali Kelas</label>
+            <input type="text" id="cls-homeroom" class="form-control" placeholder="Nama guru wali kelas">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" onclick="closeModal('class-modal')">Batal</button>
+          <button type="submit" class="btn btn-primary btn-sm">Simpan Kelas</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+  <script type="module" src="js/auth-guard.js"></script>
+  <script type="module">
+    import { initClassesPage } from './js/classes.js';
+    initClassesPage();
+  </script>
+</body>
+</html>

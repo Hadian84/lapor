@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Admin - SISWA SMART MONITORING</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="icon" type="image/jpeg" href="logo2.jpg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-allowed-roles="admin">
+
+  <div class="dashboard-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo-icon">
+          <img src="logo2.jpg" alt="Logo SMP Negeri 1 Segah">
+        </div>
+        <div class="sidebar-brand-text">
+          <h2>SMART MONITOR</h2>
+          <span>SMP Negeri 1 Segah</span>
+        </div>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="sidebar-group-title">Menu Utama</div>
+        <ul class="sidebar-menu">
+          <li><a href="dashboard-admin.html" class="sidebar-link active"><i class="fa-solid fa-gauge"></i> Dashboard Admin</a></li>
+        </ul>
+
+        <div class="sidebar-group-title">Data Master</div>
+        <ul class="sidebar-menu">
+          <li><a href="siswa.html" class="sidebar-link"><i class="fa-solid fa-user-graduate"></i> Data Siswa</a></li>
+          <li><a href="guru.html" class="sidebar-link"><i class="fa-solid fa-chalkboard-user"></i> Data Guru</a></li>
+          <li><a href="kelas.html" class="sidebar-link"><i class="fa-solid fa-school"></i> Data Kelas</a></li>
+        </ul>
+
+        <div class="sidebar-group-title">Kedisiplinan & Presensi</div>
+        <ul class="sidebar-menu">
+          <li><a href="kehadiran.html" class="sidebar-link"><i class="fa-solid fa-clipboard-user"></i> Presensi Kehadiran</a></li>
+          <li><a href="keterlambatan.html" class="sidebar-link"><i class="fa-solid fa-clock"></i> Keterlambatan</a></li>
+          <li><a href="pelanggaran.html" class="sidebar-link"><i class="fa-solid fa-triangle-exclamation"></i> Catatan Pelanggaran</a></li>
+          <li><a href="kategori-pelanggaran.html" class="sidebar-link"><i class="fa-solid fa-list-check"></i> Kategori & Poin</a></li>
+        </ul>
+
+        <div class="sidebar-group-title">Prestasi Siswa</div>
+        <ul class="sidebar-menu">
+          <li><a href="prestasi.html" class="sidebar-link"><i class="fa-solid fa-trophy"></i> Prestasi Siswa</a></li>
+          <li><a href="kategori-prestasi.html" class="sidebar-link"><i class="fa-solid fa-award"></i> Kategori Prestasi</a></li>
+        </ul>
+
+        <div class="sidebar-group-title">Laporan & Sistem</div>
+        <ul class="sidebar-menu">
+          <li><a href="laporan.html" class="sidebar-link"><i class="fa-solid fa-file-lines"></i> Laporan & Rekap</a></li>
+          <li><a href="kelola-akun.html" class="sidebar-link"><i class="fa-solid fa-user-gear"></i> Kelola Akun & Password</a></li>
+          <li><a href="pengaturan.html" class="sidebar-link"><i class="fa-solid fa-gear"></i> Pengaturan Sekolah</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user-avatar current-user-avatar">A</div>
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-name current-user-name">Administrator</div>
+          <div class="sidebar-user-role current-user-role">Administrator</div>
+        </div>
+        <button class="sidebar-logout-btn btn-logout" title="Keluar"><i class="fa-solid fa-right-from-bracket"></i></button>
+      </div>
+    </aside>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+      <!-- Top Header -->
+      <header class="top-header">
+        <div class="header-left">
+          <button class="sidebar-toggle-btn"><i class="fa-solid fa-bars"></i></button>
+          <div class="header-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="global-student-search" placeholder="Cari siswa (Nama / NIS / Kelas)...">
+          </div>
+        </div>
+
+        <div class="header-right">
+          <div class="header-academic-year">
+            <i class="fa-solid fa-calendar-days"></i>
+            <span>T.P. 2026/2027 - Ganjil</span>
+          </div>
+
+          <!-- Notification Bell -->
+          <div class="notif-wrapper">
+            <button class="notif-btn" id="notif-bell-btn">
+              <i class="fa-solid fa-bell"></i>
+              <span class="notif-badge">3</span>
+            </button>
+            <div class="notif-dropdown" id="notif-dropdown-menu"></div>
+          </div>
+
+          <!-- User Pill -->
+          <div class="user-menu-pill">
+            <div class="user-avatar-sm current-user-avatar">A</div>
+            <div style="display: flex; flex-direction: column; line-height: 1.1;">
+              <span class="current-user-name" style="font-weight: 700; font-size: 0.85rem;">Administrator</span>
+              <span class="current-user-role" style="font-size: 0.72rem; color: var(--text-muted);">Admin</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content Body -->
+      <main class="content-body">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Dashboard Administrator</h1>
+            <p class="page-subtitle">Ringkasan statistik terpadu kehadiran, kedisiplinan, dan prestasi sekolah.</p>
+          </div>
+          <div class="d-flex align-center gap-1">
+            <a href="kehadiran.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-clipboard-user"></i> Presensi Hari Ini</a>
+            <a href="pelanggaran.html" class="btn btn-outline-danger btn-sm"><i class="fa-solid fa-triangle-exclamation"></i> Catat Pelanggaran</a>
+            <a href="prestasi.html" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-trophy"></i> Catat Prestasi</a>
+          </div>
+        </div>
+
+        <!-- 1. Statistik Kartu -->
+        <div class="stat-grid">
+          <!-- Total Siswa -->
+          <div class="stat-card">
+            <div class="stat-icon blue"><i class="fa-solid fa-user-graduate"></i></div>
+            <div class="stat-info">
+              <div class="stat-value" id="stat-total-students">0</div>
+              <div class="stat-label">Total Siswa</div>
+              <div class="stat-meta text-primary"><i class="fa-solid fa-users"></i> Aktif Terdaftar</div>
+            </div>
+          </div>
+
+          <!-- Total Guru -->
+          <div class="stat-card">
+            <div class="stat-icon sky"><i class="fa-solid fa-chalkboard-user"></i></div>
+            <div class="stat-info">
+              <div class="stat-value" id="stat-total-teachers">0</div>
+              <div class="stat-label">Total Guru</div>
+              <div class="stat-meta text-info"><i class="fa-solid fa-user-tie"></i> Pengajar & Wali</div>
+            </div>
+          </div>
+
+          <!-- Total Kelas -->
+          <div class="stat-card">
+            <div class="stat-icon teal"><i class="fa-solid fa-school"></i></div>
+            <div class="stat-info">
+              <div class="stat-value" id="stat-total-classes">0</div>
+              <div class="stat-label">Total Kelas</div>
+              <div class="stat-meta text-muted">Kelas 7, 8, 9</div>
+            </div>
+          </div>
+
+          <!-- Kehadiran Hari Ini -->
+          <div class="stat-card">
+            <div class="stat-icon green"><i class="fa-solid fa-clipboard-check"></i></div>
+            <div class="stat-info">
+              <div class="stat-value" id="stat-today-attendance">0%</div>
+              <div class="stat-label">Kehadiran Hari Ini</div>
+              <div class="stat-meta text-success">
+                Sakit: <span id="stat-count-sakit">0</span> &bull; Izin: <span id="stat-count-izin">0</span> &bull; Alpa: <span id="stat-count-alpa">0</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Terlambat Hari Ini -->
+          <div class="stat-card">
+            <div class="stat-icon amber"><i class="fa-solid fa-clock"></i></div>
+            <div class="stat-info">
+              <div class="stat-value" id="stat-today-late">0</div>
+              <div class="stat-label">Terlambat Hari Ini</div>
+              <div class="stat-meta text-warning"><i class="fa-solid fa-person-walking-arrow-right"></i> Perlu Pembinaan</div>
+            </div>
+          </div>
+
+          <!-- Total Pelanggaran -->
+          <div class="stat-card">
+            <div class="stat-icon red"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <div class="stat-info">
+              <div class="stat-value text-danger" id="stat-total-violations">0</div>
+              <div class="stat-label">Total Kasus Pelanggaran</div>
+              <div class="stat-meta text-danger">Tercatat di Sistem</div>
+            </div>
+          </div>
+
+          <!-- Total Prestasi -->
+          <div class="stat-card">
+            <div class="stat-icon green"><i class="fa-solid fa-trophy"></i></div>
+            <div class="stat-info">
+              <div class="stat-value text-success" id="stat-total-achievements">0</div>
+              <div class="stat-label">Total Prestasi</div>
+              <div class="stat-meta text-success"><i class="fa-solid fa-award"></i> Apresiasi Sekolah</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Grafik Statistik Grid -->
+        <div class="charts-grid">
+          <!-- Grafik Tren Kehadiran -->
+          <div class="card chart-card">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fa-solid fa-chart-line text-primary"></i> Tren Kehadiran Mingguan (%)</h3>
+            </div>
+            <div class="card-body">
+              <div class="chart-container">
+                <canvas id="chartAttendanceTrend"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grafik Pelanggaran vs Prestasi Bulanan -->
+          <div class="card chart-card">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fa-solid fa-chart-column text-danger"></i> Perbandingan Pelanggaran vs Prestasi</h3>
+            </div>
+            <div class="card-body">
+              <div class="chart-container">
+                <canvas id="chartViolationsAchievements"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grafik Distribusi Kedisiplinan Siswa -->
+          <div class="card chart-card">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fa-solid fa-chart-pie text-warning"></i> Distribusi Status Kedisiplinan Siswa</h3>
+            </div>
+            <div class="card-body">
+              <div class="chart-container">
+                <canvas id="chartDisciplineDistribution"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grafik Status Presensi Hari Ini -->
+          <div class="card chart-card">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fa-solid fa-pie-chart text-success"></i> Komposisi Presensi Siswa Hari Ini</h3>
+            </div>
+            <div class="card-body">
+              <div class="chart-container">
+                <canvas id="chartAttendancePie"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Tabel Pemantauan Khusus & Aktivitas -->
+        <div class="d-grid gap-3" style="grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));">
+          <!-- Siswa dengan Pelanggaran Tertinggi -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fa-solid fa-triangle-exclamation text-danger"></i> Siswa Butuh Pembinaan Khusus</h3>
+              <a href="pelanggaran.html" class="btn btn-secondary btn-sm">Lihat Semua &rarr;</a>
+            </div>
+            <div class="card-body" style="padding: 0;">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th class="text-center">No</th>
+                      <th>Siswa</th>
+                      <th>Kelas</th>
+                      <th>Poin</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="top-violations-tbody">
+                    <tr><td colspan="5" class="text-center text-muted" style="padding: 1.5rem;">Memuat data...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Prestasi Siswa Terbaru -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fa-solid fa-trophy text-success"></i> Prestasi Siswa Terbaru</h3>
+              <a href="prestasi.html" class="btn btn-secondary btn-sm">Lihat Semua &rarr;</a>
+            </div>
+            <div class="card-body" style="padding: 0;">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th class="text-center">No</th>
+                      <th>Siswa</th>
+                      <th>Prestasi</th>
+                      <th>Tingkat</th>
+                      <th>Tanggal</th>
+                    </tr>
+                  </thead>
+                  <tbody id="top-achievements-tbody">
+                    <tr><td colspan="5" class="text-center text-muted" style="padding: 1.5rem;">Memuat data...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Log Aktivitas Terbaru -->
+        <div class="card mt-3">
+          <div class="card-header">
+            <h3 class="card-title"><i class="fa-solid fa-clock-rotate-left text-info"></i> Log Aktivitas Sistem Terbaru</h3>
+          </div>
+          <div class="card-body">
+            <ul class="activity-timeline" id="recent-activity-list">
+              <li class="text-muted text-sm">Memuat aktivitas...</li>
+            </ul>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script type="module" src="js/auth-guard.js"></script>
+  <script type="module">
+    import { initAdminDashboard } from './js/dashboard.js';
+    initAdminDashboard();
+  </script>
+</body>
+</html>

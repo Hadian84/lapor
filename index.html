@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SISWA SMART MONITORING - Sistem Monitoring Pelanggaran, Prestasi dan Kehadiran</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/jpeg" href="logo2.jpg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .hero-section {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #2563eb 100%);
+      color: #fff;
+      padding: 5rem 1.5rem 4rem 1.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      padding: 0.4rem 1rem;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+    .hero-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+      line-height: 1.15;
+    }
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: #cbd5e1;
+      max-width: 680px;
+      margin: 0 auto 2rem auto;
+      font-weight: 400;
+    }
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: -3.5rem;
+      padding: 0 1.5rem;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      z-index: 10;
+    }
+    .role-card {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-color);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .role-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--primary);
+    }
+    .role-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin-bottom: 1.25rem;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 4rem auto;
+      padding: 0 1.5rem;
+    }
+    .feature-item {
+      display: flex;
+      gap: 1rem;
+    }
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Demo Notice Banner -->
+  <div class="demo-banner">
+    <div class="d-flex align-center gap-1">
+      <span class="badge">SISTEM SIAP PAKAI</span>
+      <span>Siswa Smart Monitoring SMP &bull; Mode Standar / Firebase Terintegrasi</span>
+    </div>
+    <a href="login.html" class="btn btn-sm" style="background:#fff; color:var(--dark); font-weight:700;">Masuk ke Aplikasi &rarr;</a>
+  </div>
+
+  <!-- Navbar -->
+  <header style="background: #fff; border-bottom: 1px solid var(--border-color); padding: 1rem 2rem;">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
+      <div class="d-flex align-center gap-1">
+        <div class="sidebar-logo-icon" style="width: 44px; height: 44px;">
+          <img src="logo2.jpg" alt="Logo SMP Negeri 1 Segah">
+        </div>
+        <div>
+          <h1 style="font-size: 1.25rem; font-weight: 800; color: var(--dark); line-height: 1;">SISWA SMART MONITORING</h1>
+          <span style="font-size: 0.75rem; color: var(--text-muted);">SMP Negeri 1 Segah - Sistem Monitoring Siswa</span>
+        </div>
+      </div>
+      <div class="d-flex align-center gap-1">
+        <a href="login.html" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-right-to-bracket"></i> Login Portal</a>
+        <a href="dashboard-admin.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-gauge"></i> Buka Dashboard</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero-section">
+    <div class="hero-badge">
+      <i class="fa-solid fa-shield-halved"></i> Standar Kedisiplinan Digital Sekolah Modern
+    </div>
+    <h2 class="hero-title" style="color: #fff;">SISWA SMART MONITORING</h2>
+    <p class="hero-subtitle">
+      Solusi cerdas monitoring kehadiran, pencatatan keterlambatan, penegakan tata tertib berbasis poin pelanggaran, serta apresiasi prestasi siswa secara transparan dan akuntabel.
+    </p>
+    <div class="d-flex justify-center gap-1" style="justify-content: center; flex-wrap: wrap;">
+      <a href="login.html" class="btn btn-primary btn-lg" style="background: #38bdf8; color: #0f172a; font-weight: 800;">
+        <i class="fa-solid fa-arrow-right-to-bracket"></i> Masuk ke Akun Anda
+      </a>
+      <a href="profil-siswa.html?id=std-01" class="btn btn-secondary btn-lg" style="background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.25);">
+        <i class="fa-solid fa-id-card"></i> Contoh Profil Monitoring Siswa
+      </a>
+    </div>
+  </section>
+
+  <!-- Role Quick Login / Entrance Cards -->
+  <section class="role-grid">
+    <!-- Admin -->
+    <div class="role-card">
+      <div class="role-icon" style="background: #eff6ff; color: #1e40af;">
+        <i class="fa-solid fa-user-shield"></i>
+      </div>
+      <h3 style="margin-bottom: 0.35rem;">Administrator</h3>
+      <p class="text-muted text-sm" style="margin-bottom: 1.25rem;">Kelola seluruh data master siswa, guru, kelas, poin, laporan dan pengaturan sistem sekolah.</p>
+      <a href="dashboard-admin.html" class="btn btn-outline-primary btn-sm w-100 mt-auto">Akses Admin &rarr;</a>
+    </div>
+
+    <!-- Guru -->
+    <div class="role-card">
+      <div class="role-icon" style="background: #f0fdf4; color: #16a34a;">
+        <i class="fa-solid fa-chalkboard-user"></i>
+      </div>
+      <h3 style="margin-bottom: 0.35rem;">Guru Pengajar</h3>
+      <p class="text-muted text-sm" style="margin-bottom: 1.25rem;">Pencatatan presensi harian & mapel, input keterlambatan, serta pencatatan insiden pelanggaran & prestasi.</p>
+      <a href="dashboard-guru.html" class="btn btn-outline-primary btn-sm w-100 mt-auto">Akses Guru &rarr;</a>
+    </div>
+
+    <!-- Wali Kelas -->
+    <div class="role-card">
+      <div class="role-icon" style="background: #f0f9ff; color: #0284c7;">
+        <i class="fa-solid fa-users-rectangle"></i>
+      </div>
+      <h3 style="margin-bottom: 0.35rem;">Wali Kelas</h3>
+      <p class="text-muted text-sm" style="margin-bottom: 1.25rem;">Pantau rekapitulasi kehadiran kelas binaan, statistik kedisiplinan, dan cetak rapor perkembangan siswa.</p>
+      <a href="dashboard-wali-kelas.html" class="btn btn-outline-primary btn-sm w-100 mt-auto">Akses Wali Kelas &rarr;</a>
+    </div>
+
+    <!-- Siswa -->
+    <div class="role-card">
+      <div class="role-icon" style="background: #fdf2f8; color: #db2777;">
+        <i class="fa-solid fa-user-graduate"></i>
+      </div>
+      <h3 style="margin-bottom: 0.35rem;">Siswa</h3>
+      <p class="text-muted text-sm" style="margin-bottom: 1.25rem;">Lihat rekam jejak kedisiplinan diri, riwayat presensi, total poin sanksi, dan daftar capaian prestasi pribadi.</p>
+      <a href="dashboard-siswa.html" class="btn btn-outline-primary btn-sm w-100 mt-auto">Akses Siswa &rarr;</a>
+    </div>
+  </section>
+
+  <!-- Key Features Summary -->
+  <section class="feature-grid">
+    <div class="feature-item">
+      <div class="feature-icon"><i class="fa-solid fa-user-check"></i></div>
+      <div>
+        <h4 style="margin-bottom: 0.25rem;">Satu Siswa = Satu Profil</h4>
+        <p class="text-muted text-sm">Setiap siswa memiliki halaman monitoring komprehensif yang memuat identitas, presensi, pelanggaran, poin, prestasi, dan timeline aktivitas.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+      <div>
+        <h4 style="margin-bottom: 0.25rem;">Sistem Poin Transparan</h4>
+        <p class="text-muted text-sm">Kategori pelanggaran Ringan, Sedang, Berat dengan bobot poin otomatis dan penentuan predikat status kedisiplinan secara objektif.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon"><i class="fa-solid fa-trophy"></i></div>
+      <div>
+        <h4 style="margin-bottom: 0.25rem;">Pencatatan Prestasi Lengkap</h4>
+        <p class="text-muted text-sm">Dokumentasi prestasi akademik, olahraga, seni, koding, dan keagamaan mulai dari tingkat sekolah hingga internasional.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon"><i class="fa-solid fa-file-excel"></i></div>
+      <div>
+        <h4 style="margin-bottom: 0.25rem;">Laporan, Cetak & Export</h4>
+        <p class="text-muted text-sm">Kemudahan ekspor data ke format Excel (XLSX), CSV, serta layout siap cetak PDF untuk kebutuhan rapat dan arsip sekolah.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background: #0f172a; color: #94a3b8; padding: 2.5rem 1.5rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.08);">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <img src="logo2.jpg" alt="Logo SMP Negeri 1 Segah" style="width: 54px; height: 54px; object-fit: cover; border-radius: 50%; margin-bottom: 0.6rem; box-shadow: 0 4px 14px rgba(0,0,0,0.3);">
+      <h3 style="color: #fff; font-size: 1.15rem; margin-bottom: 0.5rem;">SMP Negeri 1 Segah</h3>
+      <p style="font-size: 0.85rem; margin-bottom: 1rem;">Sistem Monitoring Pelanggaran, Prestasi dan Kehadiran Siswa</p>
+      <div style="font-size: 0.75rem; color: #64748b;">
+        &copy; 2026 Siswa Smart Monitoring. Dikembangkan dengan HTML5, CSS3, JavaScript ES6 & Firebase.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

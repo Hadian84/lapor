@@ -1,0 +1,151 @@
+/* ===================================================
+   SISWA SMART MONITORING - RESPONSIVE STYLES
+   =================================================== */
+
+/* Sidebar Overlay for Mobile/Tablet */
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(2px);
+  z-index: 1035;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.sidebar-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Tablet & Smaller Screens (< 1024px) */
+@media (max-width: 1024px) {
+  :root {
+    --sidebar-width: 250px;
+  }
+
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile & Small Tablet (< 992px) */
+@media (max-width: 992px) {
+  .sidebar {
+    transform: translateX(-100%);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .sidebar.show {
+    transform: translateX(0);
+  }
+
+  .main-wrapper {
+    margin-left: 0;
+  }
+
+  .sidebar-toggle-btn {
+    display: inline-flex;
+  }
+
+  .header-search {
+    width: 240px;
+  }
+
+  .stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .form-row-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Smartphone (< 640px) */
+@media (max-width: 640px) {
+  html {
+    font-size: 13px;
+  }
+
+  .top-header {
+    padding: 0 1rem;
+  }
+
+  .header-search {
+    display: none; /* Hide header search on small phones, available in dedicated page search */
+  }
+
+  .header-academic-year span:not(.badge) {
+    display: none;
+  }
+
+  .content-body {
+    padding: 1rem;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .page-header .btn {
+    width: 100%;
+  }
+
+  .stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-action-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .modal-dialog {
+    max-width: 96vw;
+    margin: 0.5rem;
+  }
+
+  .modal-header, .modal-body, .modal-footer {
+    padding: 1rem;
+  }
+
+  .card-header {
+    padding: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  .profile-header-body {
+    padding: 0 1rem 1rem 1rem;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: -45px;
+  }
+
+  .profile-meta {
+    justify-content: center;
+  }
+
+  .notif-dropdown {
+    width: calc(100vw - 2rem);
+    right: -60px;
+  }
+
+  #toast-container {
+    left: 1rem;
+    right: 1rem;
+    top: 1rem;
+  }
+
+  .toast {
+    min-width: unset;
+    width: 100%;
+  }
+}

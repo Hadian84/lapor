@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelola Akun & Password - SISWA SMART MONITORING</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <link rel="icon" type="image/jpeg" href="logo2.jpg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-allowed-roles="admin">
+
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo-icon">
+          <img src="logo2.jpg" alt="Logo SMP Negeri 1 Segah">
+        </div>
+        <div class="sidebar-brand-text">
+          <h2>SMART MONITOR</h2>
+          <span>SMP Negeri 1 Segah</span>
+        </div>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="sidebar-group-title">Menu Utama</div>
+        <ul class="sidebar-menu">
+          <li><a href="dashboard-admin.html" class="sidebar-link"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+        </ul>
+
+        <div class="sidebar-group-title">Data Master</div>
+        <ul class="sidebar-menu">
+          <li><a href="siswa.html" class="sidebar-link"><i class="fa-solid fa-user-graduate"></i> Data Siswa</a></li>
+          <li><a href="guru.html" class="sidebar-link"><i class="fa-solid fa-chalkboard-user"></i> Data Guru</a></li>
+          <li><a href="kelas.html" class="sidebar-link"><i class="fa-solid fa-school"></i> Data Kelas</a></li>
+        </ul>
+
+        <div class="sidebar-group-title">Kedisiplinan & Presensi</div>
+        <ul class="sidebar-menu">
+          <li><a href="kehadiran.html" class="sidebar-link"><i class="fa-solid fa-clipboard-user"></i> Presensi Kehadiran</a></li>
+          <li><a href="keterlambatan.html" class="sidebar-link"><i class="fa-solid fa-clock"></i> Keterlambatan</a></li>
+          <li><a href="pelanggaran.html" class="sidebar-link"><i class="fa-solid fa-triangle-exclamation"></i> Catatan Pelanggaran</a></li>
+          <li><a href="kategori-pelanggaran.html" class="sidebar-link"><i class="fa-solid fa-list-check"></i> Kategori & Poin</a></li>
+        </ul>
+
+        <div class="sidebar-group-title">Prestasi Siswa</div>
+        <ul class="sidebar-menu">
+          <li><a href="prestasi.html" class="sidebar-link"><i class="fa-solid fa-trophy"></i> Prestasi Siswa</a></li>
+          <li><a href="kategori-prestasi.html" class="sidebar-link"><i class="fa-solid fa-award"></i> Kategori Prestasi</a></li>
+        </ul>
+
+        <div class="sidebar-group-title">Laporan & Sistem</div>
+        <ul class="sidebar-menu">
+          <li><a href="laporan.html" class="sidebar-link"><i class="fa-solid fa-file-lines"></i> Laporan & Rekap</a></li>
+          <li><a href="kelola-akun.html" class="sidebar-link active"><i class="fa-solid fa-user-gear"></i> Kelola Akun & Password</a></li>
+          <li><a href="pengaturan.html" class="sidebar-link"><i class="fa-solid fa-gear"></i> Pengaturan Sekolah</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user-avatar current-user-avatar">A</div>
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-name current-user-name">Administrator</div>
+          <div class="sidebar-user-role current-user-role">Administrator</div>
+        </div>
+        <button class="sidebar-logout-btn btn-logout" title="Keluar"><i class="fa-solid fa-right-from-bracket"></i></button>
+      </div>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="top-header">
+        <div class="header-left">
+          <button class="sidebar-toggle-btn"><i class="fa-solid fa-bars"></i></button>
+          <div class="header-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="global-student-search" placeholder="Cari siswa (Nama / NIS / Kelas)...">
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="header-academic-year"><i class="fa-solid fa-calendar-days"></i> <span>T.P. 2026/2027</span></div>
+          <div class="user-menu-pill">
+            <div class="user-avatar-sm current-user-avatar">A</div>
+            <div style="display: flex; flex-direction: column; line-height: 1.1;">
+              <span class="current-user-name" style="font-weight: 700; font-size: 0.85rem;">Admin</span>
+              <span class="current-user-role" style="font-size: 0.72rem; color: var(--text-muted);">Administrator</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="content-body">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Kelola Akun & Password Pengguna</h1>
+            <p class="page-subtitle">Atur akun login, ubah atau reset kata sandi untuk siswa dan guru, serta kendalikan hak akses sistem.</p>
+          </div>
+          <div class="d-flex align-center gap-1 flex-wrap">
+            <button class="btn btn-secondary btn-sm" id="btn-export-users-excel"><i class="fa-solid fa-file-excel"></i> Export Excel</button>
+            <button class="btn btn-secondary btn-sm" id="btn-export-users-csv"><i class="fa-solid fa-file-csv"></i> Export CSV</button>
+            <button class="btn btn-primary btn-sm" id="btn-add-account"><i class="fa-solid fa-user-plus"></i> Tambah Akun Baru</button>
+          </div>
+        </div>
+
+        <!-- Metric Stat Cards -->
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-icon blue"><i class="fa-solid fa-users"></i></div>
+            <div class="stat-info">
+              <div class="stat-value" id="stat-total-users">0</div>
+              <div class="stat-label">Total Akun Pengguna</div>
+              <div class="stat-meta text-primary">Terdaftar di Sistem</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon green"><i class="fa-solid fa-chalkboard-user"></i></div>
+            <div class="stat-info">
+              <div class="stat-value text-success" id="stat-teacher-users">0</div>
+              <div class="stat-label">Akun Guru & Staf</div>
+              <div class="stat-meta text-success">Pengajar & Wali Kelas</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon sky"><i class="fa-solid fa-user-graduate"></i></div>
+            <div class="stat-info">
+              <div class="stat-value text-info" id="stat-student-users">0</div>
+              <div class="stat-label">Akun Siswa</div>
+              <div class="stat-meta text-info">Login Menggunakan NIS</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon red"><i class="fa-solid fa-user-shield"></i></div>
+            <div class="stat-info">
+              <div class="stat-value text-danger" id="stat-admin-users">0</div>
+              <div class="stat-label">Akun Administrator</div>
+              <div class="stat-meta text-danger">Akses Penuh Sistem</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter & Search Controls -->
+        <div class="card" style="margin-bottom: 1.5rem;">
+          <div class="card-body" style="padding: 1.25rem;">
+            <div class="form-row" style="grid-template-columns: 2fr 1fr 1fr auto; align-items: flex-end;">
+              <div>
+                <label class="form-label" for="search-user">Cari Akun Pengguna</label>
+                <input type="text" id="search-user" class="form-control" placeholder="Ketik nama, username, email, NIS, atau NIP...">
+              </div>
+              <div>
+                <label class="form-label" for="filter-user-role">Filter Peran (Role)</label>
+                <select id="filter-user-role" class="form-select">
+                  <option value="">Semua Peran</option>
+                  <option value="guru_all">Guru & Wali Kelas</option>
+                  <option value="siswa">Siswa</option>
+                  <option value="admin">Administrator</option>
+                </select>
+              </div>
+              <div>
+                <label class="form-label" for="filter-user-status">Status Akun</label>
+                <select id="filter-user-status" class="form-select">
+                  <option value="">Semua Status</option>
+                  <option value="active">Aktif</option>
+                  <option value="inactive">Non-Aktif</option>
+                </select>
+              </div>
+              <div>
+                <span class="badge badge-primary" id="users-count-badge" style="padding: 0.6rem 1rem; font-size: 0.85rem;">0 Akun</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Users Table -->
+        <div class="card">
+          <div class="card-body" style="padding: 0;">
+            <div class="table-responsive">
+              <table class="table" id="users-table">
+                <thead>
+                  <tr>
+                    <th style="width: 40px;" class="text-center">No</th>
+                    <th>Nama Pengguna</th>
+                    <th>Username / Login ID</th>
+                    <th>Peran (Hak Akses)</th>
+                    <th>Status Password</th>
+                    <th>Status Akun</th>
+                    <th style="width: 200px;" class="text-center">Aksi Manajemen</th>
+                  </tr>
+                </thead>
+                <tbody id="users-tbody">
+                  <tr><td colspan="7" class="text-center text-muted" style="padding: 2rem;">Memuat daftar akun...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Modal Ubah / Reset Password -->
+  <div class="modal-backdrop" id="change-password-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title"><i class="fa-solid fa-key text-warning"></i> Ubah / Reset Password</h3>
+        <button class="modal-close" onclick="closeModal('change-password-modal')">&times;</button>
+      </div>
+      <form id="change-password-form">
+        <div class="modal-body">
+          <input type="hidden" id="pass-user-id">
+          
+          <div class="card" style="background: var(--bg-app); border: 1px solid var(--border-color); margin-bottom: 1.25rem; box-shadow: none;">
+            <div class="card-body" style="padding: 1rem;">
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Target Pengguna:</div>
+              <strong style="font-size: 1.05rem; color: var(--dark);" id="pass-user-name">Nama Pengguna</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;">
+                ID Login / Email: <span id="pass-user-login" class="fw-bold text-primary">email@sekolah</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label required" for="new-password-input">Password Baru</label>
+            <div style="position: relative;">
+              <input type="text" id="new-password-input" class="form-control" placeholder="Masukkan password baru..." required style="padding-left: 2.2rem; font-weight: 600;">
+              <i class="fa-solid fa-lock" style="position: absolute; left: 0.8rem; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label required" for="confirm-password-input">Konfirmasi Password Baru</label>
+            <div style="position: relative;">
+              <input type="text" id="confirm-password-input" class="form-control" placeholder="Ketik ulang password baru..." required style="padding-left: 2.2rem; font-weight: 600;">
+              <i class="fa-solid fa-shield-check" style="position: absolute; left: 0.8rem; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
+            </div>
+          </div>
+
+          <!-- Quick Actions Helper -->
+          <div class="d-flex align-center gap-1" style="flex-wrap: wrap; margin-top: 0.5rem;">
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-generate-password" style="font-size: 0.78rem;">
+              <i class="fa-solid fa-wand-magic-sparkles text-primary"></i> Buat Password Acak
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-reset-default-pass" style="font-size: 0.78rem;">
+              <i class="fa-solid fa-rotate-left text-warning"></i> Atur ke Default Role
+            </button>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" onclick="closeModal('change-password-modal')">Batal</button>
+          <button type="submit" class="btn btn-primary btn-sm"><i class="fa-solid fa-floppy-disk"></i> Simpan Password Baru</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Tambah / Edit Akun Pengguna -->
+  <div class="modal-backdrop" id="user-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title" id="user-modal-title">Tambah Akun Pengguna Baru</h3>
+        <button class="modal-close" onclick="closeModal('user-modal')">&times;</button>
+      </div>
+      <form id="user-form">
+        <div class="modal-body">
+          <input type="hidden" id="edit-user-id">
+
+          <div class="form-group">
+            <label class="form-label required" for="edit-user-name">Nama Lengkap Pengguna</label>
+            <input type="text" id="edit-user-name" class="form-control" placeholder="Contoh: Budi Santoso, S.Pd atau Cantika Putri" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label required" for="edit-user-role">Peran Sistem (Role)</label>
+              <select id="edit-user-role" class="form-select" required>
+                <option value="guru">Guru Pengajar</option>
+                <option value="wali_kelas">Wali Kelas</option>
+                <option value="siswa">Siswa</option>
+                <option value="admin">Administrator</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label required" for="edit-user-status">Status Akun</label>
+              <select id="edit-user-status" class="form-select" required>
+                <option value="active">Aktif (Dapat Login)</option>
+                <option value="inactive">Non-Aktif (Ditangguhkan)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label required" for="edit-user-username">Username / NIS / Identitas Login</label>
+              <input type="text" id="edit-user-username" class="form-control" placeholder="Contoh: 26001 atau budi.santoso" required>
+              <small class="text-muted" style="font-size: 0.72rem;">*Digunakan saat masuk ke sistem pada form login.</small>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="edit-user-email">Alamat Email</label>
+              <input type="email" id="edit-user-email" class="form-control" placeholder="nama@sekolah.sch.id">
+            </div>
+          </div>
+
+          <div class="form-group" id="account-pass-group">
+            <label class="form-label required" for="edit-user-initial-pass">Password Awal</label>
+            <input type="text" id="edit-user-initial-pass" class="form-control" placeholder="Contoh: guru123 atau siswa123">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" onclick="closeModal('user-modal')">Batal</button>
+          <button type="submit" class="btn btn-primary btn-sm">Simpan Akun</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+  <script type="module" src="js/auth-guard.js"></script>
+  <script type="module">
+    import { initUsersPage } from './js/users.js';
+    initUsersPage();
+  </script>
+</body>
+</html>

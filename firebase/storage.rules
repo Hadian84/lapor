@@ -1,0 +1,28 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Foto profil siswa
+    match /students/{studentId}/{fileName} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && request.resource.size < 5 * 1024 * 1024
+                   && request.resource.contentType.matches('image/.*');
+    }
+
+    // Foto bukti pelanggaran
+    match /violations/{violationId}/{fileName} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && request.resource.size < 10 * 1024 * 1024;
+    }
+
+    // Sertifikat & foto prestasi
+    match /achievements/{achievementId}/{fileName} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && request.resource.size < 10 * 1024 * 1024;
+    }
+  }
+}

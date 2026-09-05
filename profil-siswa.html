@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil Monitoring Siswa - SISWA SMART MONITORING</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="icon" type="image/jpeg" href="logo2.jpg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-allowed-roles="admin,guru,wali_kelas,siswa">
+
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo-icon">
+          <img src="logo2.jpg" alt="Logo SMP Negeri 1 Segah">
+        </div>
+        <div class="sidebar-brand-text">
+          <h2>SMART MONITOR</h2>
+          <span>Profil Siswa</span>
+        </div>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="sidebar-group-title">Navigasi</div>
+        <ul class="sidebar-menu">
+          <li><a href="dashboard-admin.html" class="sidebar-link"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+          <li><a href="siswa.html" class="sidebar-link active"><i class="fa-solid fa-user-graduate"></i> Data Siswa</a></li>
+          <li><a href="kehadiran.html" class="sidebar-link"><i class="fa-solid fa-clipboard-user"></i> Presensi</a></li>
+          <li><a href="pelanggaran.html" class="sidebar-link"><i class="fa-solid fa-triangle-exclamation"></i> Pelanggaran</a></li>
+          <li><a href="prestasi.html" class="sidebar-link"><i class="fa-solid fa-trophy"></i> Prestasi</a></li>
+          <li><a href="laporan.html" class="sidebar-link"><i class="fa-solid fa-file-lines"></i> Laporan</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user-avatar current-user-avatar">U</div>
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-name current-user-name">Pengguna</div>
+          <div class="sidebar-user-role current-user-role">Role</div>
+        </div>
+        <button class="sidebar-logout-btn btn-logout" title="Keluar"><i class="fa-solid fa-right-from-bracket"></i></button>
+      </div>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="top-header">
+        <div class="header-left">
+          <button class="sidebar-toggle-btn"><i class="fa-solid fa-bars"></i></button>
+          <div class="header-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="global-student-search" placeholder="Cari siswa (Nama / NIS / Kelas)...">
+          </div>
+        </div>
+        <div class="header-right">
+          <button class="btn btn-outline-primary btn-sm" id="btn-print-profile"><i class="fa-solid fa-print"></i> Cetak Profil Monitoring</button>
+          <div class="user-menu-pill">
+            <div class="user-avatar-sm current-user-avatar">U</div>
+            <div style="display: flex; flex-direction: column; line-height: 1.1;">
+              <span class="current-user-name" style="font-weight: 700; font-size: 0.85rem;">User</span>
+              <span class="current-user-role" style="font-size: 0.72rem; color: var(--text-muted);">Role</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="content-body">
+        <!-- Print Letterhead Header (Hanya muncul saat cetak) -->
+        <div class="print-only" style="margin-bottom: 2rem; border-bottom: 3px double #000; padding-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 1.5rem; text-align: center;">
+          <img src="logo2.jpg" alt="Logo SMPN 1 Segah" style="width: 65px; height: 65px; object-fit: contain;">
+          <div>
+            <h2 style="font-size: 16pt; margin: 0; text-transform: uppercase;">SMP NEGERI 1 SEGAH</h2>
+            <p style="margin: 2px 0; font-size: 10pt;">KARTU MONITORING KEDISIPLINAN DAN PRESTASI SISWA</p>
+            <p style="margin: 0; font-size: 9pt; color: #444;">Jl. Pendidikan, Kec. Segah, Kab. Berau | Telp. (0554) 2031123</p>
+          </div>
+        </div>
+
+        <!-- Student Profile Cover & Identity Card -->
+        <div class="card" style="margin-bottom: 2rem;">
+          <div class="profile-cover"></div>
+          <div class="profile-header-body">
+            <div class="d-flex align-center gap-2" style="flex-wrap: wrap;">
+              <div class="profile-avatar-wrapper">
+                <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=200" alt="Foto Siswa" id="profile-avatar-img" class="profile-avatar">
+              </div>
+              <div class="profile-info">
+                <div class="d-flex align-center gap-1 flex-wrap">
+                  <h1 class="profile-name" id="profile-name">Memuat Nama Siswa...</h1>
+                  <span class="badge" id="profile-status-badge">SANGAT BAIK</span>
+                </div>
+                <div class="profile-meta">
+                  <span><i class="fa-solid fa-id-card"></i> NIS: <strong id="profile-nis">-</strong></span>
+                  <span>&bull;</span>
+                  <span>NISN: <strong id="profile-nisn">-</strong></span>
+                  <span>&bull;</span>
+                  <span><i class="fa-solid fa-school"></i> <strong id="profile-class">-</strong></span>
+                  <span>&bull;</span>
+                  <span id="profile-gender">-</span>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex align-center gap-1">
+              <a href="siswa.html" class="btn btn-secondary btn-sm no-print"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+            </div>
+          </div>
+
+          <!-- Extended Profile Info -->
+          <div style="padding: 1.25rem 2rem; border-top: 1px solid var(--border-color); background: var(--bg-app);">
+            <div class="form-row" style="font-size: 0.88rem;">
+              <div><span class="text-muted">TTL:</span> <strong id="profile-birth">-</strong></div>
+              <div><span class="text-muted">Alamat:</span> <strong id="profile-address">-</strong></div>
+              <div><span class="text-muted">Orang Tua/Wali:</span> <strong id="profile-parent">-</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Summary Metrics -->
+        <div class="stat-grid">
+          <!-- Skor Kedisiplinan -->
+          <div class="stat-card">
+            <div class="stat-icon blue"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="stat-info">
+              <div class="stat-value" id="metric-score-value">96</div>
+              <div class="stat-label">Skor Kedisiplinan</div>
+              <div class="stat-meta fw-bold" id="metric-score-category">Sangat Baik</div>
+            </div>
+          </div>
+
+          <!-- Total Poin Sanksi -->
+          <div class="stat-card">
+            <div class="stat-icon red"><i class="fa-solid fa-circle-exclamation"></i></div>
+            <div class="stat-info">
+              <div class="stat-value text-danger" id="metric-total-points">0</div>
+              <div class="stat-label">Akumulasi Poin Sanksi</div>
+              <div class="stat-meta text-danger"><span id="metric-total-violations">0</span> Kasus Pelanggaran</div>
+            </div>
+          </div>
+
+          <!-- Kehadiran -->
+          <div class="stat-card">
+            <div class="stat-icon green"><i class="fa-solid fa-clipboard-user"></i></div>
+            <div class="stat-info">
+              <div class="stat-value text-success" id="metric-att-percentage">98%</div>
+              <div class="stat-label">Persentase Kehadiran</div>
+              <div class="stat-meta text-muted">
+                H: <span id="metric-att-hadir">0</span> &bull; S: <span id="metric-att-sakit">0</span> &bull; I: <span id="metric-att-izin">0</span> &bull; A: <span id="metric-att-alpa">0</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Keterlambatan -->
+          <div class="stat-card">
+            <div class="stat-icon amber"><i class="fa-solid fa-clock"></i></div>
+            <div class="stat-info">
+              <div class="stat-value text-warning" id="metric-total-late">0</div>
+              <div class="stat-label">Kejadian Terlambat</div>
+              <div class="stat-meta text-muted">Kedatangan Sekolah</div>
+            </div>
+          </div>
+
+          <!-- Prestasi -->
+          <div class="stat-card">
+            <div class="stat-icon sky"><i class="fa-solid fa-trophy"></i></div>
+            <div class="stat-info">
+              <div class="stat-value text-primary" id="metric-total-achievements">0</div>
+              <div class="stat-label">Penghargaan / Prestasi</div>
+              <div class="stat-meta text-primary">Rekognisi Resmi</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="charts-grid no-print">
+          <div class="card chart-card">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fa-solid fa-chart-pie text-success"></i> Komposisi Presensi Siswa</h3>
+            </div>
+            <div class="card-body">
+              <div class="chart-container">
+                <canvas id="chartStudentAttendance"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="card chart-card">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fa-solid fa-chart-line text-danger"></i> Tren Poin Pelanggaran Semester</h3>
+            </div>
+            <div class="card-body">
+              <div class="chart-container">
+                <canvas id="chartStudentPointsTrend"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Catatan Pelanggaran Siswa -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title"><i class="fa-solid fa-triangle-exclamation text-danger"></i> Rekam Jejak Pelanggaran Tata Tertib</h3>
+          </div>
+          <div class="card-body" style="padding: 0;">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 40px;" class="text-center">No</th>
+                    <th>Tanggal & Waktu</th>
+                    <th>Nama Pelanggaran & Kronologi</th>
+                    <th>Kategori</th>
+                    <th>Poin</th>
+                    <th>Tindakan / Pembinaan</th>
+                  </tr>
+                </thead>
+                <tbody id="student-violations-tbody">
+                  <tr><td colspan="6" class="text-center text-muted" style="padding: 1.5rem;">Memuat data pelanggaran...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Catatan Prestasi Siswa -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title"><i class="fa-solid fa-trophy text-success"></i> Portofolio Prestasi & Apresiasi Siswa</h3>
+          </div>
+          <div class="card-body" style="padding: 0;">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 40px;" class="text-center">No</th>
+                    <th>Tanggal</th>
+                    <th>Nama Prestasi</th>
+                    <th>Bidang</th>
+                    <th>Peringkat & Tingkat</th>
+                    <th>Penyelenggara</th>
+                  </tr>
+                </thead>
+                <tbody id="student-achievements-tbody">
+                  <tr><td colspan="6" class="text-center text-muted" style="padding: 1.5rem;">Memuat data prestasi...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline Aktivitas & Kedisiplinan -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title"><i class="fa-solid fa-clock-rotate-left text-info"></i> Riwayat Perkembangan Aktivitas & Kedisiplinan</h3>
+          </div>
+          <div class="card-body">
+            <ul class="activity-timeline" id="student-activity-timeline">
+              <li class="text-muted text-sm">Memuat riwayat aktivitas...</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Print Signatures Footer (Print only) -->
+        <div class="print-only" style="margin-top: 3rem; display: flex; justify-content: space-between; page-break-inside: avoid;">
+          <div style="text-align: center; width: 220px;">
+            <p style="margin-bottom: 4rem;">Mengetahui,<br>Orang Tua / Wali Siswa</p>
+            <p style="font-weight: bold; text-decoration: underline;">(............................................)</p>
+          </div>
+          <div style="text-align: center; width: 220px;">
+            <p style="margin-bottom: 4rem;">Wali Kelas</p>
+            <p style="font-weight: bold; text-decoration: underline;">(............................................)</p>
+          </div>
+          <div style="text-align: center; width: 220px;">
+            <p style="margin-bottom: 4rem;">Kepala Sekolah</p>
+            <p style="font-weight: bold; text-decoration: underline;">Hadi Permana, S.Pd, M.Pd</p>
+            <p style="font-size: 8pt; margin: 0;">NIP. 198407202009041004</p>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+  <script type="module" src="js/auth-guard.js"></script>
+  <script type="module">
+    import { initStudentProfilePage } from './js/profil-siswa.js';
+    initStudentProfilePage();
+  </script>
+</body>
+</html>

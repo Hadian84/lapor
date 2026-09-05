@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Siswa - SISWA SMART MONITORING</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <link rel="icon" type="image/jpeg" href="logo2.jpg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-allowed-roles="admin,guru,wali_kelas">
+
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo-icon">
+          <img src="logo2.jpg" alt="Logo SMP Negeri 1 Segah">
+        </div>
+        <div class="sidebar-brand-text">
+          <h2>SMART MONITOR</h2>
+          <span>SMP Negeri 1 Segah</span>
+        </div>
+      </div>
+
+      <div class="sidebar-content">
+        <div class="sidebar-group-title">Menu Utama</div>
+        <ul class="sidebar-menu">
+          <li><a href="dashboard-admin.html" class="sidebar-link"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+        </ul>
+
+        <div class="sidebar-group-title">Data Master</div>
+        <ul class="sidebar-menu">
+          <li><a href="siswa.html" class="sidebar-link active"><i class="fa-solid fa-user-graduate"></i> Data Siswa</a></li>
+          <li><a href="guru.html" class="sidebar-link"><i class="fa-solid fa-chalkboard-user"></i> Data Guru</a></li>
+          <li><a href="kelas.html" class="sidebar-link"><i class="fa-solid fa-school"></i> Data Kelas</a></li>
+        </ul>
+
+        <div class="sidebar-group-title">Kedisiplinan & Presensi</div>
+        <ul class="sidebar-menu">
+          <li><a href="kehadiran.html" class="sidebar-link"><i class="fa-solid fa-clipboard-user"></i> Presensi Kehadiran</a></li>
+          <li><a href="keterlambatan.html" class="sidebar-link"><i class="fa-solid fa-clock"></i> Keterlambatan</a></li>
+          <li><a href="pelanggaran.html" class="sidebar-link"><i class="fa-solid fa-triangle-exclamation"></i> Catatan Pelanggaran</a></li>
+          <li><a href="kategori-pelanggaran.html" class="sidebar-link"><i class="fa-solid fa-list-check"></i> Kategori & Poin</a></li>
+        </ul>
+
+        <div class="sidebar-group-title">Prestasi Siswa</div>
+        <ul class="sidebar-menu">
+          <li><a href="prestasi.html" class="sidebar-link"><i class="fa-solid fa-trophy"></i> Prestasi Siswa</a></li>
+          <li><a href="kategori-prestasi.html" class="sidebar-link"><i class="fa-solid fa-award"></i> Kategori Prestasi</a></li>
+        </ul>
+
+        <div class="sidebar-group-title">Laporan & Sistem</div>
+        <ul class="sidebar-menu">
+          <li><a href="laporan.html" class="sidebar-link"><i class="fa-solid fa-file-lines"></i> Laporan & Rekap</a></li>
+          <li><a href="kelola-akun.html" class="sidebar-link"><i class="fa-solid fa-user-gear"></i> Kelola Akun & Password</a></li>
+          <li><a href="pengaturan.html" class="sidebar-link"><i class="fa-solid fa-gear"></i> Pengaturan Sekolah</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user-avatar current-user-avatar">A</div>
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-name current-user-name">Pengguna</div>
+          <div class="sidebar-user-role current-user-role">Role</div>
+        </div>
+        <button class="sidebar-logout-btn btn-logout" title="Keluar"><i class="fa-solid fa-right-from-bracket"></i></button>
+      </div>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="top-header">
+        <div class="header-left">
+          <button class="sidebar-toggle-btn"><i class="fa-solid fa-bars"></i></button>
+          <div class="header-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="global-student-search" placeholder="Cari siswa (Nama / NIS / Kelas)...">
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="header-academic-year"><i class="fa-solid fa-calendar-days"></i> <span>T.P. 2026/2027</span></div>
+          <div class="notif-wrapper">
+            <button class="notif-btn" id="notif-bell-btn"><i class="fa-solid fa-bell"></i><span class="notif-badge">3</span></button>
+            <div class="notif-dropdown" id="notif-dropdown-menu"></div>
+          </div>
+          <div class="user-menu-pill">
+            <div class="user-avatar-sm current-user-avatar">A</div>
+            <div style="display: flex; flex-direction: column; line-height: 1.1;">
+              <span class="current-user-name" style="font-weight: 700; font-size: 0.85rem;">Admin</span>
+              <span class="current-user-role" style="font-size: 0.72rem; color: var(--text-muted);">Admin</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="content-body">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Data Induk Siswa</h1>
+            <p class="page-subtitle">Kelola database siswa, informasi wali, profil monitoring terpadu, dan import/export Excel.</p>
+          </div>
+          <div class="d-flex align-center gap-1 flex-wrap">
+            <button class="btn btn-secondary btn-sm" id="btn-import-students"><i class="fa-solid fa-file-import"></i> Import Excel</button>
+            <input type="file" id="import-file-input" accept=".xlsx,.xls,.csv" style="display: none;">
+            <button class="btn btn-secondary btn-sm" id="btn-export-excel"><i class="fa-solid fa-file-excel"></i> Export Excel</button>
+            <button class="btn btn-secondary btn-sm" id="btn-export-csv"><i class="fa-solid fa-file-csv"></i> Export CSV</button>
+            <button class="btn btn-secondary btn-sm" id="btn-print-students"><i class="fa-solid fa-print"></i> Cetak</button>
+            <button class="btn btn-primary btn-sm" id="btn-add-student"><i class="fa-solid fa-plus"></i> Tambah Siswa</button>
+          </div>
+        </div>
+
+        <!-- Filter & Search Controls -->
+        <div class="card" style="margin-bottom: 1.5rem;">
+          <div class="card-body" style="padding: 1.25rem;">
+            <div class="form-row" style="grid-template-columns: 2fr 1fr 1fr auto; align-items: flex-end;">
+              <div>
+                <label class="form-label" for="search-student">Cari Siswa</label>
+                <input type="text" id="search-student" class="form-control" placeholder="Ketik nama, NIS, atau NISN...">
+              </div>
+              <div>
+                <label class="form-label" for="filter-class">Filter Kelas</label>
+                <select id="filter-class" class="form-select">
+                  <option value="">Semua Kelas</option>
+                  <option value="cls-7a">Kelas 7A</option>
+                  <option value="cls-7b">Kelas 7B</option>
+                  <option value="cls-8a">Kelas 8A</option>
+                  <option value="cls-8b">Kelas 8B</option>
+                  <option value="cls-9a">Kelas 9A</option>
+                  <option value="cls-9b">Kelas 9B</option>
+                </select>
+              </div>
+              <div>
+                <label class="form-label" for="filter-gender">Jenis Kelamin</label>
+                <select id="filter-gender" class="form-select">
+                  <option value="">Semua</option>
+                  <option value="L">Laki-laki</option>
+                  <option value="P">Perempuan</option>
+                </select>
+              </div>
+              <div>
+                <span class="badge badge-primary" id="student-count" style="padding: 0.6rem 1rem; font-size: 0.85rem;">20 Siswa</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Student Data Table -->
+        <div class="card">
+          <div class="card-body" style="padding: 0;">
+            <div class="table-responsive">
+              <table class="table" id="students-table">
+                <thead>
+                  <tr>
+                    <th style="width: 50px;" class="text-center">No</th>
+                    <th>Nama Siswa</th>
+                    <th>NIS / NISN</th>
+                    <th>L/P</th>
+                    <th>Kelas</th>
+                    <th>Orang Tua / Wali</th>
+                    <th>Status</th>
+                    <th style="width: 140px;" class="text-center">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="students-tbody">
+                  <tr><td colspan="8" class="text-center text-muted" style="padding: 2rem;">Memuat data siswa...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="text-muted text-xs">Menampilkan data siswa aktif dan rekap monitoring</span>
+            <ul class="pagination" id="students-pagination"></ul>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Modal Tambah / Edit Siswa -->
+  <div class="modal-backdrop" id="student-modal">
+    <div class="modal-dialog modal-dialog-lg">
+      <div class="modal-header">
+        <h3 class="modal-title" id="student-modal-title">Tambah Siswa Baru</h3>
+        <button class="modal-close" onclick="closeModal('student-modal')">&times;</button>
+      </div>
+      <form id="student-form">
+        <div class="modal-body">
+          <input type="hidden" id="student-id">
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label required" for="student-nis">NIS (Nomor Induk Siswa)</label>
+              <input type="text" id="student-nis" class="form-control" placeholder="Contoh: 26021" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="student-nisn">NISN</label>
+              <input type="text" id="student-nisn" class="form-control" placeholder="10 digit nomor nasional">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label required" for="student-name">Nama Lengkap</label>
+              <input type="text" id="student-name" class="form-control" placeholder="Nama lengkap siswa" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="student-nickname">Nama Panggilan</label>
+              <input type="text" id="student-nickname" class="form-control" placeholder="Nama panggilan">
+            </div>
+          </div>
+
+          <div class="form-row-3">
+            <div class="form-group">
+              <label class="form-label required" for="student-gender">Jenis Kelamin</label>
+              <select id="student-gender" class="form-select" required>
+                <option value="L">Laki-laki</option>
+                <option value="P">Perempuan</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label required" for="student-class">Kelas</label>
+              <select id="student-class" class="form-select" required>
+                <option value="cls-7a">Kelas 7A</option>
+                <option value="cls-7b">Kelas 7B</option>
+                <option value="cls-8a">Kelas 8A</option>
+                <option value="cls-8b">Kelas 8B</option>
+                <option value="cls-9a">Kelas 9A</option>
+                <option value="cls-9b">Kelas 9B</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="student-status">Status Siswa</label>
+              <select id="student-status" class="form-select">
+                <option value="active">Aktif</option>
+                <option value="inactive">Non-Aktif / Pindah</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="student-birthplace">Tempat Lahir</label>
+              <input type="text" id="student-birthplace" class="form-control" placeholder="Kota kelahiran">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="student-birthdate">Tanggal Lahir</label>
+              <input type="date" id="student-birthdate" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="student-address">Alamat Tempat Tinggal</label>
+            <textarea id="student-address" class="form-control" rows="2" placeholder="Alamat lengkap..."></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="student-parent-name">Nama Orang Tua / Wali</label>
+              <input type="text" id="student-parent-name" class="form-control" placeholder="Nama ayah/ibu/wali">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="student-parent-phone">Nomor HP Orang Tua / WhatsApp</label>
+              <input type="text" id="student-parent-phone" class="form-control" placeholder="08xxxxxxxxxx">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="student-phone">Nomor HP Siswa (Jika ada)</label>
+              <input type="text" id="student-phone" class="form-control" placeholder="08xxxxxxxxxx">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="student-photo-url">URL Foto Siswa</label>
+              <input type="url" id="student-photo-url" class="form-control" placeholder="https://...">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" onclick="closeModal('student-modal')">Batal</button>
+          <button type="submit" class="btn btn-primary btn-sm">Simpan Data Siswa</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+  <script type="module" src="js/auth-guard.js"></script>
+  <script type="module">
+    import { initStudentsPage } from './js/students.js';
+    initStudentsPage();
+  </script>
+</body>
+</html>
